@@ -1,3 +1,13 @@
+// `DEPLOY_ENV` が `GH_PAGES` の場合のみ `router.base = '/<repository-name>/'` を追加する
+const routerBase =
+  process.env.DEPLOY_ENV === 'GH_PAGES'
+    ? {
+        router: {
+          base: '/population-transition/'
+        }
+      }
+    : {}
+
 export default {
   mode: 'universal',
   /*
@@ -57,5 +67,6 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
-  }
+  },
+  ...routerBase
 }
